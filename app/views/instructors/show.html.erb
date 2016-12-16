@@ -1,0 +1,20 @@
+<h3>Instructor name : <%= @instructor.name %></h3>
+	Email 	:	<%= @instructor.email %><br/>
+<p>Bio : <%= @instructor.bio %></p><br/>
+<b>Course offered</b>
+<ul>
+<% @instructor.courses.each do |course| %>
+	<li><%= link_to course.name, course_path(course.id) %></li>
+<% end %>
+</ul>
+<b>Publications</b>
+<ul>
+<% @instructor.publications.each do |publication| %>
+	<li><%= link_to publication.title, publication.link, target: "_blank" %></li>
+<% end %>
+</ul>
+
+<%= link_to "Edit", edit_instructor_path(@instructor.id) %> | <%= link_to "Delete", instructor_path(@instructor.id), method: :delete, data: {confirm: "Are you sure"} %>
+
+<br/><br/>
+<%= link_to "Back", :back %>

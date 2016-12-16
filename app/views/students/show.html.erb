@@ -1,0 +1,35 @@
+<h3>Student name : <%= @student.name %></h3>
+<p>	Email 	- 	<%= @student.email %><br/>
+	Major 	- 	<%= @student.major %><br/>
+</p>
+
+<%= link_to "Edit", edit_student_path(@student.id) %> | <%= link_to "Delete", student_path(@student.id), method: :delete, data: {confirm: "Are you sure"} %><br/><br/>
+
+<b>Enrolled courses</b>
+<ul>
+	<% @student.courses.each do |course| %>
+		<li><%= link_to course.name, course_path(course.id) %> by <%= link_to course.instructor.name.capitalize, instructor_path(course.instructor.id) %></li>
+	<% end %>
+</ul>
+
+<%= form_for @course_rating do |f| %>
+	<% if @course_rating.errors.any? %>
+		<div class = "errors" style = "color: red;">
+			<ul>
+				<% @course_rating.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<%= f.label :rating %><br/>
+	<%= f.number_field :rating %><br/>
+	<%= f.label :course %><br/>
+	<%= f.collection_select :course_id, @student.courses, :id, :name, prompt: "Select course" %><br/>
+	<%= f.hidden_field :student_id, value: @student.id %><br/>
+	<%= f.submit "Submit" %> 
+
+<% end %>
+
+<%= link_to "Back", :back %>

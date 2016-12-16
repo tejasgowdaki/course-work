@@ -1,0 +1,7 @@
+<h3>Instructors list</h3>
+<%= link_to "Add instructor", new_instructor_path %>
+<ol>
+	<% @instructors.each do |instructor| %>
+		<li><%= link_to instructor.name, instructor_path(instructor.id) %></li>
+	<% end %>
+</ol>

@@ -1,0 +1,9 @@
+<h3>Publications list</h3>
+<%= link_to "Add publication", new_publication_path %>
+<ol>
+	<% @publications.each do |publication| %>
+		<li><%= link_to publication.title, publication.link, target: "_blank" %>	By <%= link_to publication.instructor.name.capitalize, instructor_path(publication.instructor.id) %><br/>
+		<%= link_to "Edit", edit_publication_path(publication.id) %> | <%= link_to "Delete", publication_path(publication.id), method: :delete, data: {confirm: "Are you sure"} %>			
+		</li>
+	<% end %>
+</ol>

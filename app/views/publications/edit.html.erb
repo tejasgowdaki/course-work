@@ -1,0 +1,23 @@
+<h2>Edit publication details</h2>
+
+<%= form_for @publication do |f| %>
+	<% if @publication.errors.any? %>
+		<div class = "errors" style = "color: red;">
+			<ul>
+				<% @publication.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.label :title %><br/>
+	<%= f.text_field :title %><br/>
+	<%= f.label :link %><br/>
+	<%= f.text_field :link %><br/>
+	<%= f.label :instructor_id %><br/>
+	<%= f.collection_select :instructor_id, Instructor.all, :id, :name, prompt: "Select instructor" %><br/><br/>
+
+	<%= f.submit %>
+<% end %>
+<br/>
+<%= link_to "Back", :back %>

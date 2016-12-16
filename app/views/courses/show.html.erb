@@ -1,0 +1,22 @@
+<h3>Course name : <%= @course.name %></h3>
+<b>Instructor </b>: <%= link_to @course.instructor.name, instructor_path(@course.instructor.id) %><br/><br/>
+<b>Description</b><br/><p><%= @course.description %></p>
+
+<h4>Listing students</h4>
+<ol>
+<% @course.students.each do |student| %>
+	<li><%= link_to student.name.capitalize, student_path(student.id) %></li>
+<% end %>
+</ol>
+
+
+<%= link_to "Edit", edit_course_path(@course.id) %> | <%= link_to "Delete", course_path(@course.id), method: :delete, data: {confirm: "Are you sure"} %>
+<br/>
+<b>Ratings</b>
+<ol>
+	<% @course.course_ratings.each do |c_rate| %>
+		<li><%= c_rate.student.name %> - <%= c_rate.rating %>/5 </li>
+	<% end %>
+</ol>
+<br/><br/>
+<%= link_to "Back", :back %>

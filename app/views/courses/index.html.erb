@@ -1,0 +1,7 @@
+<h3>Courses list</h3>
+<%= link_to "Add course", new_course_path %>
+<ol>
+	<% @courses.each do |course| %>
+		<li><%= link_to course.name, course_path(course.id) %></li>
+	<% end %>
+</ol>
